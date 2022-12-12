@@ -27,5 +27,47 @@
         android:id="@+id/difficultyFragment"
         android:name="com.example.triviaquiz.DifficultyFragment"
         android:label="fragment_difficulty"
-        tools:layout="@layout/fragment_difficulty" />
+        tools:layout="@layout/fragment_difficulty" >
+        <action
+            android:id="@+id/action_difficultyFragment_to_quizFragment"
+            app:destination="@id/quizFragment"
+            app:popUpTo="@id/categoryFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="category"
+            app:argType="string"
+            android:defaultValue="null" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizFragment"
+        android:name="com.example.triviaquiz.QuizFragment"
+        android:label="fragment_quiz"
+        tools:layout="@layout/fragment_quiz" >
+        <action
+            android:id="@+id/action_quizFragment_to_resultFragment"
+            app:destination="@id/resultFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="category"
+            app:argType="string" />
+        <argument
+            android:name="difficulty"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.example.triviaquiz.ResultFragment"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result" >
+        <argument
+            android:name="myargs"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_resultFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/resultFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

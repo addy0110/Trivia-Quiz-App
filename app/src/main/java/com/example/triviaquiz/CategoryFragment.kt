@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.example.triviaquiz.databinding.FragmentCategoryBinding
@@ -15,6 +16,7 @@ import com.example.triviaquiz.databinding.FragmentCategoryBinding
 class CategoryFragment : Fragment() {
     private lateinit var binding: FragmentCategoryBinding
     private val options = ArrayList<TextView>()
+    private var mSelectedOption: String = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,10 +30,17 @@ class CategoryFragment : Fragment() {
         options.add(4,binding.tvOptionGk)
 
         binding.btDone.setOnClickListener{
-            findNavController().navigate(R.id.action_categoryFragment_to_difficultyFragment)
+            if(mSelectedOption == ""){
+//                Toast.makeText(context,"Select any Category",Toast.LENGTH_SHORT).show()
+            }
+            else {
+                val action = CategoryFragmentDirections.actionCategoryFragmentToDifficultyFragment(mSelectedOption)
+                findNavController().navigate(action)
+            }
         }
         binding.tvOptionAnimals.setOnClickListener{
             defaultOptionView()
+            mSelectedOption = "Animals"
             it.background = ContextCompat.getDrawable(
                 requireContext(),
                 R.drawable.selected_option_border
@@ -39,6 +48,7 @@ class CategoryFragment : Fragment() {
         }
         binding.tvOptionHistory.setOnClickListener {
             defaultOptionView()
+            mSelectedOption = "History"
             it.background = ContextCompat.getDrawable(
                 requireContext(),
                 R.drawable.selected_option_border
@@ -46,6 +56,7 @@ class CategoryFragment : Fragment() {
         }
         binding.tvOptionSports.setOnClickListener {
             defaultOptionView()
+            mSelectedOption = "Sports"
             it.background = ContextCompat.getDrawable(
                 requireContext(),
                 R.drawable.selected_option_border
@@ -53,6 +64,7 @@ class CategoryFragment : Fragment() {
         }
         binding.tvOptionMathematics.setOnClickListener {
             defaultOptionView()
+            mSelectedOption = "Mathematics"
             it.background = ContextCompat.getDrawable(
                 requireContext(),
                 R.drawable.selected_option_border
@@ -60,6 +72,7 @@ class CategoryFragment : Fragment() {
         }
         binding.tvOptionGk.setOnClickListener {
             defaultOptionView()
+            mSelectedOption = "General Knowledge"
             it.background = ContextCompat.getDrawable(
                 requireContext(),
                 R.drawable.selected_option_border
@@ -68,6 +81,7 @@ class CategoryFragment : Fragment() {
         return binding.root
     }
     fun defaultOptionView(){
+        mSelectedOption = ""
         for(option in options){
             option.background = ContextCompat.getDrawable(
                 requireContext(),
